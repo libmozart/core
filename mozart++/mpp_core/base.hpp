@@ -31,7 +31,7 @@
  * Mozart++ Version: 20.2.1
  */
 
-#define __Mozart 200201L
+#define __libmozart 200201L
 
 /**
  * Platform detection
