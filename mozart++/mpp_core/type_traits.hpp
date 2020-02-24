@@ -78,7 +78,7 @@ namespace mpp {
     using requires_same = requires_true<std::is_same<T, R>::value>;
 
     template <typename T>
-    using remove_cr_t = std::remove_reference_t<std::remove_const_t<T>>;
+    using remove_cr_t = std::remove_const_t<std::remove_reference_t<T>>;
 
     /**
      * Integer Sequence
