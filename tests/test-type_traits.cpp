@@ -18,7 +18,7 @@ int main() {
     using namespace mpp;
     static_assert(is_iterable_v<std::vector<int>>, "You wrote a bug");
     static_assert(is_iterable_v<std::vector<std::vector<int>>>, "You wrote a bug");
-    static_assert(is_iterable_v<std::string>, "You wrote a bug");
+    static_assert(!is_iterable_v<std::string>, "You wrote a bug");
     static_assert(!is_iterable_v<int>, "You wrote a bug");
     static_assert(!is_iterable_v<mpp::function<void()>>, "You wrote a bug");
     static_assert(!is_iterable_v<mpp::function<const char *()>>, "You wrote a bug");

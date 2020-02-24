@@ -198,7 +198,10 @@ namespace mpp {
     };
 
     template <typename, typename = mpp::requires_all<>>
-    struct is_iterable : mpp::false_type {};
+    struct is_iterable : public mpp::false_type {};
+
+    template <typename CharT>
+    struct is_iterable<std::basic_string<CharT>> : public mpp::false_type {};
 
     template <typename T>
     struct is_iterable<T,
