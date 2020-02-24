@@ -77,6 +77,9 @@ namespace mpp {
     template <typename T, typename R>
     using requires_same = requires_true<std::is_same<T, R>::value>;
 
+    template <typename T>
+    using remove_cr_t = std::remove_reference_t<std::remove_const_t<T>>;
+
     /**
      * Integer Sequence
      * usage: using seq = make_sequence_t<Maximum>;
@@ -210,5 +213,30 @@ namespace mpp {
     };
 
     template <typename T>
-    static constexpr bool is_iterable_v = is_iterable<T>::value;
+    static constexpr bool is_iterable_v = is_iterable<mpp::remove_cr_t<T>>::value;
+
+    template <typename, typename = void>
+    struct iterable_traits {};
+
+    template <typename Container>
+    struct iterable_traits<Container, std::enable_if_t<is_iterable_v<Container>>> {
+        using iterator_type = typename mpp::remove_cr_t<Container>::iterator;
+        using const_iterator_type = typename mpp::remove_cr_t<Container>::const_iterator;
+
+        static constexpr iterator_type begin(Container &&c) {
+            return c.begin();
+        }
+
+        static constexpr iterator_type end(Container &&c) {
+            return c.end();
+        }
+
+        static constexpr const_iterator_type cbegin(Container &&c) {
+            return c.cbegin();
+        }
+
+        static constexpr const_iterator_type cend(Container &&c) {
+            return c.cbegin();
+        }
+    };
 }
