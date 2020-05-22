@@ -43,5 +43,5 @@ namespace mpp {
     };
 
     template <typename, typename... ArgsT>
-    void throw_ex(ArgsT &&...);
+    MOZART_NORETURN void throw_ex(ArgsT &&...);
 }
